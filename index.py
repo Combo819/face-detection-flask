@@ -44,7 +44,6 @@ def login():
                 'login': False
             })
     elif request.method == 'GET':
-        print(session)
         if 'username' in session:
             return jsonify({'login': True, 'name': session['username'], 'password': session['password'],
                             'avaSrc': 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png'})
@@ -56,7 +55,6 @@ def login():
 @app.route('/logout', methods=['GET'])
 def logout():
     session.clear()
-    print(session)
     if 'username' in session:
         return jsonify({'logout': False})
     else:
@@ -76,7 +74,6 @@ def load_image():
             'uploadTime': i
         }
         images.append(single)
-    print(images)
 
     return jsonify({'images': images})
 
@@ -102,7 +99,7 @@ def upload():
         return jsonify({'error': False, 'message': 'Image uploaded!'})
 
 
-@app.route('/mainpage', methods=['GET'])
+@app.route('/main', methods=['GET'])
 def main():
     if 'username' in session:
         return jsonify({'login': True, 'name': session['username'], 'password': session['password'],
